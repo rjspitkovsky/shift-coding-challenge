@@ -1,9 +1,25 @@
 import React from 'react';
 
 class Timer extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      timer: 0,
+      status: 'off'
+    }
+  }
+
   render() {
   return (
-    <h2> This is a timer app </h2>
+    <div>
+    <button> This is a timer app </button>
+    <div>
+      <h3>{this.state.timer}</h3>
+      <ul>
+      
+      </ul>
+      </div>
+      </div>
   )
 }
 }
