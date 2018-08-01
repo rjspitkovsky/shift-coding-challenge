@@ -4,16 +4,23 @@ class Timer extends React.Component {
   constructor() {
     super()
     this.state = {
-      timer: 0,
+      timer: {seconds:0, clicked: "no"},
       status: 'off'
     }
+
   }
 
-  changeTime = () => {
-    this.setState({
-      timer: ++this.state.timer
-    })
-  }
+
+
+  changeTimer = () => setInterval(() => this.setState({
+    timer: {seconds: this.state.timer.seconds + 1}
+  }), 1000)
+    // setInterval
+    // this.setState({
+    //   timer: {seconds: ++this.state.timer}
+
+    // })
+
 
   startTimer = (event) => {
     event.preventDefault()
@@ -22,12 +29,20 @@ class Timer extends React.Component {
 
       this.setState({
         status: "on",
-        timer: setInterval(() => this.changeTime(), 1000)
+        // timer: setInterval(() => this.changeTime(), 1000)
       })
+      this.changeTimer()
     }
     else if (this.state.status === "on") {
-      const timerValue = this.state.timer
-        document.getElementById("splits").append(`${this.state.timer}`)
+        // this.setState({
+        //   timer: {...this.state.timer,
+        //   clicked: "yes"}
+        // })
+        // const secondSplits = clickedSeconds.map((second) =>
+        //   <li><button onClick={console.log("testing")}>{second}</button></li>
+        // )
+
+        document.getElementById("splits").append(`${this.state.timer.seconds}`)
       }
 
     }
@@ -41,7 +56,7 @@ class Timer extends React.Component {
     <button onClick={event => this.startTimer(event)}> This is a timer app </button>
     <div>
       <div id="timer">
-      {(this.state.timer !== 0) ? <p>{this.state.timer}</p> : null}
+      {(this.state.timer.seconds !== 0) ? <p>{this.state.timer.seconds}</p> : null}
       </div>
       <ul id="splits">
 
