@@ -9,29 +9,26 @@ class Timer extends React.Component {
     }
   }
 
+  changeTime = () => {
+    this.setState({
+      timer: ++this.state.timer
+    })
+  }
 
   startTimer = (event) => {
     event.preventDefault()
 
     if (this.state.status === "off") {
-    this.setState({
-      status: "click to start timer"
-    })
-  }
-    else if (this.state.status === "click to start timer") {
+
       this.setState({
         status: "on",
-        timer: setInterval(() => this.setState({
-          timer: ++this.state.timer
-        }), 1000)
+        timer: setInterval(() => this.changeTime(), 1000)
       })
     }
-    // else if (this.state.status === "on") {
-    //   this.setState({
-    //     status: "paused",
-    //     timer: this.state.timer
-    //   })
-    // }
+    else if (this.state.status === "on") {
+      const timerValue = this.state.timer
+        document.getElementById("splits").append(`${this.state.timer}`)
+      }
 
     }
 
@@ -46,7 +43,7 @@ class Timer extends React.Component {
       <div id="timer">
       {(this.state.timer !== 0) ? <p>{this.state.timer}</p> : null}
       </div>
-      <ul>
+      <ul id="splits">
 
       </ul>
       </div>
