@@ -1,4 +1,5 @@
 import React from 'react';
+import './App.css'
 
 class Timer extends React.Component {
   constructor() {
@@ -11,11 +12,13 @@ class Timer extends React.Component {
   }
 
 
-
-  changeTimer = () => setInterval(() => this.setState({
+    changeTimer = () => setInterval(() => this.setState({
     timer: {seconds: this.state.timer.seconds + 1, ...this.state.clicked}
   }), 1000)
 
+
+
+  // stopTimer = () => clearInterval(() => this.changeTimer())
 
 
   startTimer = (event) => {
@@ -32,6 +35,7 @@ class Timer extends React.Component {
         clickedSeconds.push(this.state.timer.seconds)
         // const secondSplit = clickedSeconds.map((second) => <li key={second.toString()}>{second}</li>)
         const li = document.createElement("li")
+        li.className = "white"
         // const button = document.createElement("button")
         // const liWithButton = li.appendChild(button)
         li.innerHTML = this.state.timer.seconds
@@ -48,7 +52,13 @@ class Timer extends React.Component {
         // }))
         document.getElementById("splits").append(li)
         // console.log(clickedSeconds)
+        // const $ = function (element) {
+        //   return document.getElementsByTagName(element)
+        // }
+
         const lis = document.getElementsByTagName("LI")
+
+        // const lis = $("lis")
       //   if (lis.length > 0) {
       //   lis.forEach(function(li) {
       //     li.addEventListener('click', function() {
@@ -56,9 +66,28 @@ class Timer extends React.Component {
       //   })
       // })
       //   }
+
+      // for (let i = 0; i < lis.length; i++) {
+      //   const li = lis[i]
+      //   li.onclick =
+      //   function splitFunction() {
+      //     this.className += "red"
+      //   }
+      //
+      //   li.onclick = splitFunction().bind(this)
+      // }
+
       Array.prototype.forEach.call(lis, li => {
+
             li.addEventListener('click', function() {
-            console.log("This is a test")
+              this.className = "red"
+            //   clearInterval(this.changeTimer())
+            //   this.setState({
+            //   status: "paused",
+            //   timer: {seconds: li.innerHTML}
+            // })
+
+            console.log(`${li.innerHTML}`)
           })
         })
 
