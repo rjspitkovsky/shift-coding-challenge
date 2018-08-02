@@ -10,33 +10,46 @@ class Timer extends React.Component {
     }
   }
 
+
   startTimer = (event) => {
     event.preventDefault()
+    // start timer until the first click
+    let timesClicked = 0
+    timesClicked++
 
     if (this.state.status === "off") {
 
       this.setState({
         status: "on"
       })
-    //   const intervalId = setInterval(() => this.setState({
-    //   timer: {seconds: this.state.timer.seconds + 1}
-    // }), 1000)
-    // debugger
     const interval = setInterval(function() {
       const p = document.getElementById("secondsTimer")
 
       if (document.getElementsByClassName("clicked").length === 0)
       p.innerHTML = Number(p.innerHTML) + 1
-
-      // this.setState({
-      //   timer: {seconds: Number(p.innerHTML) + 1}
-      // })
       if (document.getElementsByClassName("clicked").length > 0)
       clearInterval(interval)
-      p.innerHTML = Number(p.innerHTML) 
     }, 1000)
   }
-    else if (this.state.status === "on") {
+  if (document.getElementsByClassName("clicked").length > 0 && this.state.status === "on") {
+
+    this.setState({
+      status: "off"
+    })
+    // this restarts the interval if the timer is clicked after a split reset
+    const newInterval = setInterval(function() {
+      const p = document.getElementById("secondsTimer")
+      const clickedSplits = document.getElementsByClassName("clicked").length
+      if (document.getElementsByClassName("clicked").length === clickedSplits)
+      p.innerHTML = Number(p.innerHTML) + 1
+
+      if (document.getElementsByClassName("clicked").length > clickedSplits)
+      clearInterval(newInterval)
+      // p.innerHTML = Number(p.innerHTML)
+    }, 1000)
+  }
+    if ((this.state.status === "on" || this.state.status === "off") && Number(document.getElementById("secondsTimer").innerHTML) !== 0) {
+      // This should work no matter how many splits have been clicked
         const li = document.createElement("li")
         const p = document.getElementById("secondsTimer")
         li.innerHTML = Number(p.innerHTML)
@@ -61,12 +74,13 @@ class Timer extends React.Component {
           })
         })
       }
+
     }
 
   render() {
   return (
     <div>
-    <p>{this.state.status}</p>
+    {/*<p>{this.state.status}</p>*/}
     <button onClick={event => this.startTimer(event)}> This is a timer app </button>
 
     <div>
