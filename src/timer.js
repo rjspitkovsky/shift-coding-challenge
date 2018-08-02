@@ -11,10 +11,23 @@ class Timer extends React.Component {
 
   }
 
+  pauseTimer = () => {
+    const lis = document.getElementsByTagName("LI")
+    if (Array.prototype.some.call(lis, li => {
+      li.className === "clicked"
+    })) {
+      this.setState({
+        status: "paused"
+      })
+    }
+  }
 
-    changeTimer = () => setInterval(() => this.setState({
-    timer: {seconds: this.state.timer.seconds + 1, ...this.state.clicked}
-  }), 1000)
+
+//   const interval = setInterval(() => this.setState({
+//   timer: {seconds: this.state.timer.seconds + 1, ...this.state.clicked}
+// }), 1000)
+//
+//     changeTimer = () => {interval()}
 
 
 
@@ -23,14 +36,23 @@ class Timer extends React.Component {
 
   startTimer = (event) => {
     event.preventDefault()
-
+    const interval = () => setInterval(() => this.setState({
+    timer: {seconds: this.state.timer.seconds + 1, ...this.state.clicked}
+  }), 1000)
     if (this.state.status === "off") {
 
       this.setState({
         status: "on"
       })
-      this.changeTimer()
+      // this.changeTimer()
+      interval()
     }
+    else if (this.state.status === "paused") {
+      const stopInterval = interval()
+      clearInterval(stopInterval)
+    }
+
+
     else if (this.state.status === "on") {
         // clickedSeconds.push(this.state.timer.seconds)
         // const secondSplit = clickedSeconds.map((second) => <li key={second.toString()}>{second}</li>)
@@ -79,7 +101,12 @@ class Timer extends React.Component {
 
       Array.prototype.forEach.call(lis, li => {
 
+
+
             li.addEventListener('click', function() {
+              // pauseTimer()
+              const p = document.getElementById("secondsTimer")
+              p.innerHTML = this.innerHTML
               this.className = "clicked"
               // if (li.className !== "clicked" && li.innerHTML > this.innerHTML) {
               //   document.getElementById("splits").removeElement("li")
@@ -97,7 +124,7 @@ class Timer extends React.Component {
             //   clearInterval(this.changeTimer())
             //   this.setState({
             //   status: "paused",
-            //   timer: {seconds: li.innerHTML}
+            //   // timer: {seconds: li.innerHTML}
             // })
 
 
@@ -117,7 +144,7 @@ class Timer extends React.Component {
     <button onClick={event => this.startTimer(event)}> This is a timer app </button>
     <div>
       <div id="timer">
-      {(this.state.timer.seconds !== 0) ? <p>{this.state.timer.seconds}</p> : <p>0</p>}
+      {(this.state.timer.seconds !== 0) ? <p id="secondsTimer">{this.state.timer.seconds}</p> : <p>0</p>}
       </div>
       <ul id="splits">
 
