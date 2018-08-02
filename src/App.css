@@ -27,10 +27,6 @@
   to { transform: rotate(360deg); }
 }
 
-.red {
+.clicked {
   background-color: red;
-}
-
-.white {
-  background-color: white;
 }
