@@ -110,10 +110,26 @@ class Timer extends React.Component {
     }
   }
 
+  sendStatusToTimer = (status) => {
+    var nextSecond = this.state.seconds
+    var startTimer = () => {
+      this.setState({
+        seconds: nextSecond++
+      })
+
+    }
+    var myInterval = setInterval(startTimer, 1000)
+
+
+    if (status === "off") {
+      myInterval
+    }
+  }
+
   render() {
     return (
       <div>
-      <Button />
+      <Button sendStatusToTimer={this.sendStatusToTimer}/>
       <p>{this.state.seconds} {this.state.seconds < 2 ? "second" : "seconds"}</p>
       <UnorderedList />
       </div>
