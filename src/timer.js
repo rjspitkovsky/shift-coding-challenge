@@ -118,11 +118,21 @@ class Timer extends React.Component {
       })
 
     }
-    var myInterval = setInterval(startTimer, 1000)
-
-
     if (status === "off") {
-      myInterval
+    var myInterval = setInterval(startTimer, 1000)
+  }
+
+
+
+  var addClickedSecond = () => {
+    return [...this.state.clickedSeconds, this.state.seconds]
+  }
+
+    if (status === "on") {
+      this.setState({
+        clickedSeconds: addClickedSecond()
+      })
+      console.log(this.state.clickedSeconds)
     }
   }
 

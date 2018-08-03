@@ -17,6 +17,9 @@ class Button extends React.Component {
         status: "on"
       })
     }
+    if (status === "on") {
+      this.props.sendStatusToTimer(status)
+    }
   }
 
   render() {
