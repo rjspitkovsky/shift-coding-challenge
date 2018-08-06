@@ -16,7 +16,7 @@ class Timer extends React.Component {
       this.setState({
         status: "on"
       })
-
+      // START TIMER UNTIL A SPLIT TIME HAS BEEN CLICKED
     const interval = setInterval(function() {
       const p = document.getElementById("secondsTimer")
         if (document.getElementsByClassName("clicked").length === 0)
@@ -25,6 +25,7 @@ class Timer extends React.Component {
           clearInterval(interval)
       }, 1000)
     }
+    // RE-START TIMER AFTER A SPLIT TIME HAS BEEN CLICKED
     if (document.getElementsByClassName("clicked").length > 0 && this.state.status === "on") {
       this.setState({
         status: "off"
@@ -39,6 +40,7 @@ class Timer extends React.Component {
           clearInterval(newInterval)
         }, 1000)
     }
+    // CREATE AN LI, SET INNERHTML TO TIMER, THEN APPEND TO UL AS SPLITS
     if ((this.state.status === "on" || this.state.status === "off") && Number(document.getElementById("secondsTimer").innerHTML) !== 0) {
 
       const li = document.createElement("li")
@@ -46,7 +48,7 @@ class Timer extends React.Component {
       li.innerHTML = Number(p.innerHTML)
       document.getElementById("splits").append(li)
       const lis = document.getElementsByTagName("LI")
-
+    // ADD CLICK EVENT FUNCTIONALITY TO EACH SPLITS. ADD CLASSNAME FOR HIGHLIGHTING, ITERATE THROUGH COLLECTION OF SPLITS, REMOVE SPLITS WITH A HIGHER TIMER 
       Array.prototype.map.call(lis, li => {
           li.addEventListener('click', function() {
             const p = document.getElementById("secondsTimer")
