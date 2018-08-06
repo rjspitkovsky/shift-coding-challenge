@@ -2,4 +2,8 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  background-color: #B0E0E6;
+  /* background-image: url('http://simpleicon.com/wp-content/uploads/stopwatch-2-256x256.png'); */
+  background-image: linear-gradient(red,yellow);
+  background-repeat: no-repeat;
 }

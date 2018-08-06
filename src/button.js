@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import "./styles/button.css"
 
 class Button extends React.Component {
 
@@ -15,7 +16,7 @@ class Button extends React.Component {
 
   render() {
     return (
-      <button onClick={event => this.manageTimer(event)}>click me!</button>
+      <button onClick={event => this.manageTimer(event)}>Start Timer!</button>
     )
   }
 }

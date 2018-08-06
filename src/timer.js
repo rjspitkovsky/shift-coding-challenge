@@ -1,6 +1,7 @@
 import React from 'react';
 import Button from './button'
 import UnorderedList from './unorderedList'
+import './styles/timer.css'
 
 class Timer extends React.Component {
   constructor() {
@@ -56,13 +57,15 @@ class Timer extends React.Component {
     console.log(this.state.clickedSeconds)
   }
 
-
-
   render() {
     return (
       <div>
+      <h1>SHIFT MARKETS TIMER CHALLENGE</h1>
+      <h3>Click the button to start the timer. <br />
+       Clicking the button again will record the split time. <br />
+       Clicking a split time will reset the timer and delete slower splits.</h3>
       <Button addClickedSecond={this.addClickedSecond} status={this.state.status} sendStatusToTimer={this.sendStatusToTimer}/>
-      <p>{this.state.seconds} {this.state.seconds < 2 ? "second" : "seconds"}</p>
+      <p id="timer">{this.state.seconds} {this.state.seconds < 2 ? "second" : "seconds"}</p>
       {this.state.clickedSeconds.length > 0 ?
       <UnorderedList sendStatusToTimer={this.sendStatusToTimer} clickedSeconds={this.state.clickedSeconds}/> : null}
       </div>
