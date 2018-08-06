@@ -121,6 +121,7 @@ class Timer extends React.Component {
         status: "off"
       })
     }
+
     var nextSecond = this.state.seconds
     var startTimer = () => {
       this.state.status === "on" ?
@@ -129,6 +130,7 @@ class Timer extends React.Component {
       }) :
       clearInterval(myInterval)
     }
+
     var myInterval = setInterval(startTimer, 1000)
   //   if (this.state.status === "off") {
   //
@@ -147,7 +149,19 @@ class Timer extends React.Component {
   //     })
   //     console.log(this.state.clickedSeconds)
   //   }
+  this.setSecond()
   }
+
+  setSecond = () => {
+    var clickedLength = document.getElementsByClassName("clicked").length
+    if (clickedLength > 0) {
+      var clicked = Number(document.getElementsByClassName("clicked").item(clickedLength - 1).innerText)
+      this.setState({
+        seconds: clicked
+      })
+    }
+  }
+
   addClickedSecond = () => {
     var addSecond = () => {
       return [...this.state.clickedSeconds, this.state.seconds]
