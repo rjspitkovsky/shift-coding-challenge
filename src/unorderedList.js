@@ -7,8 +7,47 @@ class UnorderedList extends React.Component {
     event.preventDefault()
     event.target.className = "clicked"
     var splitTime = Number(event.target.innerText)
-    Array.from(document.getElementsByTagName("li")).filter(li => Number(li.innerText) > splitTime)
-    this.props.sendStatusToTimer(splitTime)
+    var lis = document.getElementsByTagName("li")
+    Array.prototype.map.call(lis, li => {
+
+      for (let i = 0; i < lis.length; i++) {
+        const li = lis[i]
+
+      if (li.className !== "clicked" && splitTime < Number(li.innerText)) {
+        // debugger
+          document.getElementById("splits").removeChild(li)
+      }
+    }
+  })
+
+    this.props.sendStatusToTimer()
+
+  //          const li = document.createElement("li")
+  //         const p = document.getElementById("secondsTimer")
+  //         li.innerHTML = Number(p.innerHTML)
+  //         document.getElementById("splits").append(li)
+  //         const lis = document.getElementsByTagName("LI")
+  //
+  //       Array.prototype.map.call(lis, li => {
+  //
+  //             li.addEventListener('click', function() {
+  //
+  //               const p = document.getElementById("secondsTimer")
+  //               p.innerHTML = this.innerHTML
+  //               this.className = "clicked"
+  //
+  //               for (let i = 0; i < lis.length; i++) {
+  //                    const li = lis[i]
+  //                 if (li.className !== "clicked" && Number(li.innerHTML) > Number(this.innerHTML)) {
+  //
+  //                   document.getElementById("splits").removeChild(li)
+  //                 }
+  //                 }
+  //           })
+  //         })
+  //       }
+
+
     // debugger
     // var lis = document.getElementsByTagName("li")
     // Array.from(lis).forEach(function(li) {
@@ -30,18 +69,18 @@ class UnorderedList extends React.Component {
 
   displayListItems = () => {
   const splitList = this.props.clickedSeconds.map((second, index) => {
-    return (<div key={index}>
-    <li><button onClick={event => this.resetTimer(event)}>{second}</button></li>
-  </div>)
+    return (
+    <li key={index}><button onClick={event => this.resetTimer(event)}>{second}</button></li>
+  )
   })
   return splitList
 }
 
   render() {
     return (
-      <div>
+
       <ul id="splits">{this.displayListItems()}</ul>
-      </div>
+
     )
   }
 }
