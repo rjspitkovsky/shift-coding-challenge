@@ -64,7 +64,7 @@
 //               this.className = "clicked"
 //
 //               for (let i = 0; i < lis.length; i++) {
-//                 const li = lis[i]
+//                    const li = lis[i]
 //                 if (li.className !== "clicked" && Number(li.innerHTML) > Number(this.innerHTML)) {
 //
 //                   document.getElementById("splits").removeChild(li)
@@ -112,17 +112,30 @@ class Timer extends React.Component {
   }
 
   sendStatusToTimer = () => {
-    var nextSecond = this.state.seconds
-    var startTimer = () => {
+    if (this.state.status === "off") {
       this.setState({
-        seconds: nextSecond++,
+        status: "on"
+      })
+    } else {
+      this.setState({
+        status: "off"
       })
     }
-    this.setState({
-      status: "on"
-    })
+    var nextSecond = this.state.seconds
+    var startTimer = () => {
+      this.state.status === "on" ?
+      this.setState({
+        seconds: nextSecond++,
+      }) :
+      clearInterval(myInterval)
+    }
     var myInterval = setInterval(startTimer, 1000)
-
+  //   if (this.state.status === "off") {
+  //
+  //   this.setState({
+  //     status: "on"
+  //   })
+  // }
 
   // var addClickedSecond = () => {
   //   return [...this.state.clickedSeconds, this.state.seconds]
@@ -145,13 +158,15 @@ class Timer extends React.Component {
     console.log(this.state.clickedSeconds)
   }
 
+
+
   render() {
     return (
       <div>
       <Button addClickedSecond={this.addClickedSecond} status={this.state.status} sendStatusToTimer={this.sendStatusToTimer}/>
       <p>{this.state.seconds} {this.state.seconds < 2 ? "second" : "seconds"}</p>
       {this.state.clickedSeconds.length > 0 ?
-      <UnorderedList clickedSeconds={this.state.clickedSeconds}/> : null}
+      <UnorderedList sendStatusToTimer={this.sendStatusToTimer} clickedSeconds={this.state.clickedSeconds}/> : null}
       </div>
     )
   }

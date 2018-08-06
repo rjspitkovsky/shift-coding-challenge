@@ -1,9 +1,31 @@
 import React from 'react';
+import './App.css'
 
 class UnorderedList extends React.Component {
 
   resetTimer = (event) => {
-    console.log(event.target.value)
+    event.preventDefault()
+    event.target.className = "clicked"
+    var splitTime = Number(event.target.innerText)
+    Array.from(document.getElementsByTagName("li")).filter(li => Number(li.innerText) > splitTime)
+    this.props.sendStatusToTimer(splitTime)
+    // debugger
+    // var lis = document.getElementsByTagName("li")
+    // Array.from(lis).forEach(function(li) {
+    //   if (li.className !== "clicked" && li.innerText > splitTime) {
+    //     document.getElementById("splits").removeElement(li)
+    //   }
+    // })
+    // const lis = document.getElementsByTagName("LI")
+    // debugger
+    // Array.prototype.forEach.call(lis, li => {
+    //   for (let i = 0; i < lis.length; i++) {
+    //     const li = lis[i]
+    //     if (li.className !== "clicked" && Number(li.innerHTML) > Number(event.target.innerHTML)) {
+    //       document.getElementById("splits").removeElement(li)
+    //     }
+    //   }
+    // })
   }
 
   displayListItems = () => {
@@ -18,7 +40,7 @@ class UnorderedList extends React.Component {
   render() {
     return (
       <div>
-      <ul>{this.displayListItems()}</ul>
+      <ul id="splits">{this.displayListItems()}</ul>
       </div>
     )
   }
