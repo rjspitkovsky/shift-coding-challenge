@@ -23,24 +23,24 @@ class Timer extends React.Component {
         status: "off"
       })
     }
-    var nextSecond = this.state.seconds
-    var startTimer = () => {
+    const nextSecond = this.state.seconds
+    const startTimer = () => {
       this.state.status === "on" ? this.setState({seconds: nextSecond++}) : clearInterval(myInterval)
     }
-    var myInterval = setInterval(startTimer, 1000)
+    const myInterval = setInterval(startTimer, 1000)
     this.setSecond()
   }
 
   setSecond = () => {
-    var clickedLength = document.getElementsByClassName("clicked").length
+    const clickedLength = document.getElementsByClassName("clicked").length
     if (clickedLength > 0) {
-      var clicked = Number(document.getElementsByClassName("clicked").item(clickedLength - 1).innerText)
+      const clicked = Number(document.getElementsByClassName("clicked").item(clickedLength - 1).innerText)
       this.setState({seconds: clicked})
     }
   }
 
   addClickedSecond = () => {
-    var addSecond = () => {
+    const addSecond = () => {
       return [...this.state.clickedSeconds, this.state.seconds]
     }
     this.setState({clickedSeconds: addSecond()})
@@ -50,7 +50,7 @@ class Timer extends React.Component {
     return (
       <div>
         <h1>SHIFT MARKETS TIMER CHALLENGE</h1>
-        
+
         <h3>Click the button to start the timer. <br />
         Clicking the button again will record the split time. <br />
         Clicking a split time will reset the timer and delete slower splits.</h3>
