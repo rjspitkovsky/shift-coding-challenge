@@ -106,42 +106,52 @@ class Timer extends React.Component {
     super()
     this.state = {
       clickedSeconds: [],
-      seconds: 0
+      seconds: 0,
+      status: "off"
     }
   }
 
-  sendStatusToTimer = (status) => {
+  sendStatusToTimer = () => {
     var nextSecond = this.state.seconds
     var startTimer = () => {
       this.setState({
-        seconds: nextSecond++
+        seconds: nextSecond++,
       })
-
     }
-    if (status === "off") {
+    this.setState({
+      status: "on"
+    })
     var myInterval = setInterval(startTimer, 1000)
+
+
+  // var addClickedSecond = () => {
+  //   return [...this.state.clickedSeconds, this.state.seconds]
+  // }
+  //
+  //   if (status === "on") {
+  //     this.setState({
+  //       clickedSeconds: addClickedSecond()
+  //     })
+  //     console.log(this.state.clickedSeconds)
+  //   }
   }
-
-
-
-  var addClickedSecond = () => {
-    return [...this.state.clickedSeconds, this.state.seconds]
-  }
-
-    if (status === "on") {
-      this.setState({
-        clickedSeconds: addClickedSecond()
-      })
-      console.log(this.state.clickedSeconds)
+  addClickedSecond = () => {
+    var addSecond = () => {
+      return [...this.state.clickedSeconds, this.state.seconds]
     }
+    this.setState({
+      clickedSeconds: addSecond()
+    })
+    console.log(this.state.clickedSeconds)
   }
 
   render() {
     return (
       <div>
-      <Button sendStatusToTimer={this.sendStatusToTimer}/>
+      <Button addClickedSecond={this.addClickedSecond} status={this.state.status} sendStatusToTimer={this.sendStatusToTimer}/>
       <p>{this.state.seconds} {this.state.seconds < 2 ? "second" : "seconds"}</p>
-      <UnorderedList />
+      {this.state.clickedSeconds.length > 0 ?
+      <UnorderedList clickedSeconds={this.state.clickedSeconds}/> : null}
       </div>
     )
   }

@@ -1,24 +1,35 @@
 import React from 'react'
 
 class Button extends React.Component {
-  constructor() {
-    super()
-    this.state = {
-      status: "off"
-    }
-  }
+  // constructor() {
+  //   super()
+  //   this.state = {
+  //     job: null
+  //   }
+  // }
+
+  // componentDidMount() {
+  //   if (this.props.status === "off") {
+  //     this.setState({
+  //       job: "startTimer"
+  //     })
+  //   }
+  //   else if (this.props.status === "on"){
+  //     this.setState({
+  //       job: "collectSeconds"
+  //     })
+  //   }
+  // }
+
 
   manageTimer = (event) => {
     event.preventDefault()
-    var status = this.state.status
-    if (status === "off") {
-      this.props.sendStatusToTimer(status)
-      this.setState({
-        status: "on"
-      })
+
+    if (this.props.status === "off") {
+      this.props.sendStatusToTimer()
     }
-    if (status === "on") {
-      this.props.sendStatusToTimer(status)
+    else if (this.props.status === "on") {
+      this.props.addClickedSecond()
     }
   }
 
