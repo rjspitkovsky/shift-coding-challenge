@@ -6,7 +6,8 @@ class UnorderedList extends React.Component {
   resetTimer = (event) => {
     event.preventDefault()
     event.target.className = "clicked"
-
+    const splitTime = Number(event.target.innerText)
+    const lis = document.getElementsByTagName("li")
     Array.prototype.map.call(lis, li => {
       for (let i = 0; i < lis.length; i++) {
         const li = lis[i]

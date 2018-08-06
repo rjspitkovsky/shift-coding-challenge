@@ -7,7 +7,7 @@ class Button extends React.Component {
     if (this.props.status === "off") {
       this.props.sendStatusToTimer()
     }
-    else (this.props.status === "on") {
+    else if (this.props.status === "on") {
       this.props.addClickedSecond()
     }
   }
