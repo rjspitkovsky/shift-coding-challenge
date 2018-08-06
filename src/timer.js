@@ -27,7 +27,7 @@ class Timer extends React.Component {
   }
 
   setSecond = () => {
-    var clickedLength = document.getElementsByClassName("clicked").length
+    const clickedLength = document.getElementsByClassName("clicked").length
     if (clickedLength > 0) {
       var clicked = Number(document.getElementsByClassName("clicked").item(clickedLength - 1).innerText)
       this.setState({seconds: clicked})
@@ -35,7 +35,7 @@ class Timer extends React.Component {
   }
 
   addClickedSecond = () => {
-    var addSecond = () => {
+    const addSecond = () => {
       return [...this.state.clickedSeconds, this.state.seconds]
     }
     this.setState({clickedSeconds: addSecond()})
@@ -51,9 +51,9 @@ class Timer extends React.Component {
 
         <Button addClickedSecond={this.addClickedSecond} status={this.state.status} sendStatusToTimer={this.sendStatusToTimer}/>
 
-        <p id="timer">{this.state.seconds} {this.state.seconds < 2 ? "second" : "seconds"}</p>
+        <p>{this.state.seconds} {this.state.seconds < 2 ? "second" : "seconds"}</p>
 
-        {this.state.clickedSeconds.length > 0 ?
+          {this.state.clickedSeconds.length > 0 ?
           <UnorderedList sendStatusToTimer={this.sendStatusToTimer} clickedSeconds={this.state.clickedSeconds}/> : null}
       </div>
     )
